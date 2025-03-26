@@ -10,8 +10,12 @@ export default function Index() {
   return (
     <View className='container'>
       <View className='content'>
-        <Text>Hello world!</Text>
+        <Text>个人中心</Text>
       </View>
     </View>
   )
 }
+
+definePageConfig({
+  navigationBarTitleText: '个人中心',
+})

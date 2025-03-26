@@ -13,3 +13,7 @@ export default function Index() {
     </View>
   )
 }
+
+definePageConfig({
+  navigationBarTitleText: '登录',
+})
