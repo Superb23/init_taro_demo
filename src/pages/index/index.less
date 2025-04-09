@@ -1,16 +1,35 @@
 .container {
+  box-sizing: border-box;
   width: 100vw;
   height: 100vh;
   background: url('https://img-baofun.zhhainiao.com/pcwallpaper_ugc_mobile/live/9a76f712530785b133e54592eaf57b7e_preview_mid.jpg')
     no-repeat 100% 40%;
+  position: relative;
   display: flex;
   justify-content: center;
-  align-items: center;
+  overflow: scroll;
 
-  .content {
-    border: 2px solid #fff;
-    border-radius: 10px;
-    color: #fff;
-    padding: 24px;
+  .input-area {
+    position: fixed;
+    bottom: 8px;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+
+    width: 90%;
+    height: 100px;
+    background: #fff;
+    border-radius: 24px;
+  }
+
+  .search-btn {
+    position: absolute;
+    top: 50%;
+    right: 24px;
+    transform: translateY(-50%);
+
+    color: #000;
+    font-size: 32px;
+    font-weight: 500;
   }
 }
