@@ -1,11 +1,35 @@
 .chat-content {
   width: 100%;
-  height: calc(100% - 160px);
+  height: calc(100% - 180px);
   overflow-y: scroll;
-  padding: 24px;
+  padding: 24px 12px;
+
+  &-item-right {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &-item-left {
+    display: flex;
+  }
 
   &-item {
-    font-size: 24px;
+    font-size: 28px;
     color: #fff;
+    margin-bottom: 24px;
+
+    &-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      margin: 0 16px;
+    }
+
+    &-content {
+      max-width: calc(80% - 92px);
+      border-radius: 10px;
+      padding: 16px;
+      background-color: rgba(255, 255, 255, 0.3);
+    }
   }
 }

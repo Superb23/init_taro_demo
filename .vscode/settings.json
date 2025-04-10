@@ -1,0 +1,22 @@
+{
+	// 保存时进行格式化
+	"editor.formatOnSave": true,
+	"editor.tabSize": 2,
+	// ESLint 配置
+	"eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+	"eslint.trace.server": "verbose",
+	"eslint.workingDirectories": [
+		{
+			"mode": "auto"
+		}
+	],
+	// 设置默认格式化程序
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	// 各类文件默认格式化程序
+	"[css]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[less]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+}

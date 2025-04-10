@@ -1,9 +1,6 @@
-// eslint-disable-next-line import/no-duplicates
-import { Component } from 'react'
-// eslint-disable-next-line import/no-duplicates
-import { PropsWithChildren } from 'react'
-import './sdk'
+import { Component, PropsWithChildren } from 'react'
 
+import './sdk'
 import './app.less'
 
 class App extends Component<PropsWithChildren> {
