@@ -3,7 +3,9 @@ import { View, Text, Input } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import * as TextEncoding from 'text-encoding-shim'
 import { ChatMessage, INQUIRY_TYPE } from '@/types/chat'
-import { AVATAR_URL } from '@/constants/url'
+import { AVATAR_URL, BASE_URL } from '@/constants/url'
+import clsx from 'clsx'
+import { CHAT_INIT } from '@/constants'
 
 import { ChatContent } from './chat-content'
 import './index.less'
@@ -14,11 +16,13 @@ export default function Index() {
   // 输出
   const [answer, setAnswer] = useState('')
   // 聊天记录
-  const [chatData, setChatData] = useState<ChatMessage[]>([])
+  const [chatData, setChatData] = useState<ChatMessage[]>([CHAT_INIT])
   // 是否正在回答
   const [isAnswering, setIsAnswering] = useState(false)
   // 记录添加控制
   const isAddRecord = useRef(false)
+  // 请求是否失败
+  const isRequestFail = useRef(false)
 
   // 搜索
   const handleSearch = useCallback(async () => {
@@ -39,7 +43,7 @@ export default function Index() {
     setIsAnswering(true)
 
     const requestTask = Taro.request({
-      url: `http://localhost:3000/inquery/chat?query=${inputValue}`,
+      url: `${BASE_URL}/inquery/chat?query=${inputValue}`,
       method: 'GET',
       // 类似于stream
       enableChunked: true,
@@ -47,10 +51,10 @@ export default function Index() {
         setIsAnswering(false)
         isAddRecord.current = false
       },
-      fail(e) {
+      fail() {
         setIsAnswering(false)
         isAddRecord.current = false
-        console.log('request fail', e)
+        isRequestFail.current = true
       },
     })
     // 监听返回数据  转码、拼接
@@ -61,7 +65,7 @@ export default function Index() {
   }, [inputValue, isAnswering, chatData])
 
   useEffect(() => {
-    if (!isAnswering && chatData.length > 0 && !isAddRecord.current) {
+    if (!isAnswering && chatData.length > 1 && !isAddRecord.current) {
       isAddRecord.current = true
       setAnswer('')
       setChatData([
@@ -70,7 +74,7 @@ export default function Index() {
           type: INQUIRY_TYPE.REPLY,
           name: '机器人',
           avatar: AVATAR_URL[INQUIRY_TYPE.REPLY],
-          content: answer,
+          content: isRequestFail.current ? '服务器繁忙，请稍后再试。' : answer,
         },
       ])
     }
@@ -88,7 +92,7 @@ export default function Index() {
           disabled={isAnswering}
           onInput={(e) => setInputValue(e.detail.value)}
         />
-        <Text className='search-btn' onClick={handleSearch}>
+        <Text className={clsx('search-btn', { 'search-btn-disabled': isAnswering })} onClick={handleSearch}>
           搜索
         </Text>
       </View>

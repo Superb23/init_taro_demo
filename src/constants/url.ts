@@ -1,5 +1,9 @@
 import { INQUIRY_TYPE } from '@/types'
 
+/** fetch baseUrl */
+// export const BASE_URL = 'http://localhost:3000'
+export const BASE_URL = 'http://116.62.88.81:5000'
+
 /** 头像url */
 export const AVATAR_URL = {
   /** 用户 */
